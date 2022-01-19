@@ -1,7 +1,10 @@
 package com.example.jaccount.model;
 
-import java.time.LocalDate;
+import com.example.jaccount.Transaction;
+
+import java.util.List;
 
 public interface IModel {
-    public void addTransaction(String nameIn, double amountIn, LocalDate dateIn);
+    public void addTransaction(Transaction transaction);
+    public List<Transaction> getTransactions();
 }

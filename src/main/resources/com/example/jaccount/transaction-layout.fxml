@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<HBox xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      spacing="80"
+      stylesheets="@css/main.css">
+    <Label fx:id="nameLabel" minWidth="200"/>
+    <Region HBox.hgrow="ALWAYS"/>
+    <Label fx:id="amountLabel" alignment="CENTER_RIGHT" minWidth="200"/>
+    <Region HBox.hgrow="ALWAYS"/>
+    <Label fx:id="dateLabel" alignment="CENTER_RIGHT" minWidth="200"/>
+</HBox>

@@ -1,6 +1,6 @@
 package com.example.jaccount;
 
-import com.example.jaccount.controller.AppController;
+import com.example.jaccount.control.AppController;
 import com.example.jaccount.model.AccountingModel;
 import com.example.jaccount.view.AppView;
 import javafx.application.Application;
@@ -17,13 +17,6 @@ public class AccountingApp extends Application {
         AppController controller = new AppController();
         controller.setModel(model);
         controller.setView(view);
-
-        //try {
-
-            //model.readDataBase();
-      //  } catch (Exception e){
-            //System.out.print(e);
-       // }
     }
 
     public static void main(String[] args) {

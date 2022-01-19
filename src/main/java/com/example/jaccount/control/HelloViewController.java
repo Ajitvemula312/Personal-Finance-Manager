@@ -1,4 +1,4 @@
-package com.example.jaccount.controller;
+package com.example.jaccount.control;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;

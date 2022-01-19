@@ -1,0 +1,25 @@
+.root {
+	-fx-background-color: #22232D;
+	-fx-font-family: "Monospace";
+}
+
+.list-view {
+	-fx-background-color: #282A36;
+}
+.cell {
+	-fx-background-color: transparent;
+}
+
+.cell:focused {
+	-fx-background-color: #3E404B;
+}
+
+.label {
+	-fx-text-fill: white;
+}
+
+
+.transaction-list-item {
+	-fx-text-fill: #8F1840;
+	-fx-font-size: 16px;
+}

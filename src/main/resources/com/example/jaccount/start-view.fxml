@@ -14,5 +14,6 @@
     <TextField fx:id="nameField"/>
     <Label fx:id="amountLabel" text="Transaction Amount:"/>
     <TextField fx:id="amountField" />
-    <Button text="Add Transaction" onAction="#onAddTransactionButtonClicked"/>
+    <Button text="Add Transaction" onAction="#addTransaction"/>
+    <Button text="Print Transactions" onAction="#printTransactions"/>
 </VBox>
