@@ -10,21 +10,28 @@ import javafx.scene.layout.VBox;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.HashMap;
 import java.util.ResourceBundle;
 
-public class MainTransactionsView implements Initializable {
+public class MainView implements Initializable {
   @FXML
   private HBox topBox;
   @FXML
   private VBox centerBox;
   private ListView<HBox> transactionsList;
   private String totalAmount;
+  private String save;
+  private String spend;
+  private HashMap<String,String> categoryAmounts;
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {
     if (transactionsList != null) centerBox.getChildren().add(transactionsList);
     FXMLLoader fxmlLoader = new FXMLLoader(AccountingApp.class.getResource("summary-view.fxml"));
-    fxmlLoader.setController(new SummaryView(totalAmount));
+    SummaryView summary = new SummaryView();
+    summary.setTotal(totalAmount);
+    summary.setCategories(categoryAmounts);
+    fxmlLoader.setController(summary);
 
     try {
       topBox.getChildren().add(fxmlLoader.load());
@@ -38,5 +45,15 @@ public class MainTransactionsView implements Initializable {
   }
   public void setTotal(String totalIn){
     totalAmount = totalIn;
+  }
+  public void setSave(String textIn){
+    save = textIn;
+  }
+  public void setSpend(String textIn){
+    spend = textIn;
+  }
+
+  public void setCategories(HashMap<String, String> categoriesandAmounts) {
+    categoryAmounts = categoriesandAmounts;
   }
 }

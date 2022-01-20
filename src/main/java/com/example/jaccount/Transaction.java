@@ -30,10 +30,7 @@ public class Transaction {
   }
 
   public String getAmountString() {
-    if (amount < 0)
-      return String.format("-$" + "%.2f", -amount);
-    else
-      return String.format("$" + "%.2f", amount);
+    return JAccountUtil.formatAsMoney(amount);
   }
 
   public Date getDate() {

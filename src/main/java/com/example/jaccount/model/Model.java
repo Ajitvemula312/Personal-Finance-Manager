@@ -7,10 +7,10 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AccountingModel implements IModel {
+public class Model implements IModel {
   private Connection connection = null;
   private PreparedStatement preparedStatement = null;
-  private ResultSet resultSet = null;
+  //private ResultSet resultSet = null;
   private final String database = "accounting_sheet";
   private final String table = "transactions";
 
@@ -31,50 +31,105 @@ public class AccountingModel implements IModel {
     } catch (SQLException e) {
       System.out.println(e);
     } finally {
-      close();
+      close(null);
     }
+  }
+
+  @Override
+  public ArrayList<String> getCategories() {
+    ArrayList<String> categories = new ArrayList<>();
+    createConnection(database, System.getenv("SQL_USER"), System.getenv("SQL_PASSWORD"));
+    ResultSet resultSet = null;
+    try {
+      resultSet = query("SELECT name from " + database + "." + "categories");
+    } catch (SQLException e) {
+      e.printStackTrace();
+    }
+    if (resultSet != null) {
+      try {
+        while (resultSet.next()) {
+          String name = resultSet.getString("name");
+          categories.add(name);
+        }
+      } catch (SQLException e) {
+        e.printStackTrace();
+      }
+    }
+    return categories;
   }
 
   public List<Transaction> getTransactions() {
     ArrayList<Transaction> transactions = new ArrayList<>();
     createConnection(database, System.getenv("SQL_USER"), System.getenv("SQL_PASSWORD"));
+    ResultSet resultSet = null;
     try {
-      preparedStatement = connection
-          .prepareStatement("SELECT name, amount, date, category from " + database + "." + table);
-      resultSet = preparedStatement.executeQuery();
-      while (resultSet.next()) {
-        String name = resultSet.getString("name");
-        double amount = resultSet.getInt("amount");
-        Date date = resultSet.getDate("date");
-        String category = resultSet.getString("category");
-        transactions.add(new Transaction(name, amount, date, category));
-      }
+      resultSet = query(
+  "SELECT name, amount, date, category " +
+          "from " + database + "." + table
+          + " ORDER BY date DESC");
     } catch (SQLException e) {
       System.out.println(e);
-    } finally {
-      close();
     }
+    if (resultSet != null) {
+      try {
+        while (resultSet.next()) {
+          String name = resultSet.getString("name");
+          double amount = resultSet.getInt("amount");
+          Date date = resultSet.getDate("date");
+          String category = resultSet.getString("category");
+          transactions.add(new Transaction(name, amount, date, category));
+        }
+      } catch (SQLException e) {
+        e.printStackTrace();
+      }
+    }
+    close(resultSet);
     return transactions;
   }
 
-  public double sumAllTransactions(){
-    double sum = 0;
+  private ResultSet query(String queryIn) throws SQLException {
+    ResultSet resultSet;
     createConnection(database, System.getenv("SQL_USER"), System.getenv("SQL_PASSWORD"));
+    preparedStatement = connection.prepareStatement(queryIn);
+    resultSet = preparedStatement.executeQuery();
+    return resultSet;
+  }
+
+  private final String genericAmountSelect = ("SELECT amount FROM " + database + "." + table);
+
+  public double sumAllTransactions() {
+    return sumQuery(genericAmountSelect);
+  }
+
+  @Override
+  public double sumForCategory(String category) {
+    return sumQuery(genericAmountSelect + " WHERE category='" + category + "'");
+  }
+
+  public double sumQuery(String query) {
+    double sum = 0;
+    ResultSet resultSet = null;
     try {
-      preparedStatement = connection
-          .prepareStatement("SELECT amount from " + database + "." + table);
-      resultSet = preparedStatement.executeQuery();
-      while (resultSet.next()) {
-        double amount = resultSet.getBigDecimal("amount").doubleValue();
-        sum += amount;
-      }
+      resultSet = query(query);
+      sum = sumResults(resultSet);
     } catch (SQLException e) {
       System.out.println(e);
     } finally {
-      close();
+      close(resultSet);
     }
     return Math.round(sum);
   }
+
+
+  private double sumResults(ResultSet results) throws SQLException {
+    double sum = 0;
+    while (results.next()) {
+      double amount = results.getBigDecimal("amount").doubleValue();
+      sum += amount;
+    }
+    return sum;
+  }
+
 
   private void createConnection(String databaseIn, String userIn, String passwordIn) {
     try {
@@ -117,7 +172,7 @@ public class AccountingModel implements IModel {
     }
   }
 
-  private void close() {
+  private void close(ResultSet resultSet) {
     try {
       if (resultSet != null) {
         resultSet.close();

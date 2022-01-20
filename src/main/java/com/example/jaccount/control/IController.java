@@ -6,6 +6,7 @@ import com.example.jaccount.view.IAppView;
 import javafx.event.ActionEvent;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public interface IController {
     void setModel(IModel modelIn);
@@ -14,4 +15,5 @@ public interface IController {
     void printTransactions(ActionEvent actionEvent);
     ArrayList<Transaction> getTransactions();
     double getTotal();
+    HashMap<String, String> getCategoriesandAmounts();
 }

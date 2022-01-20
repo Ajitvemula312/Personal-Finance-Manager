@@ -29,13 +29,6 @@ public class TransactionItemView extends HBox implements Initializable {
     date = dateIn;
   }
 
-  public TransactionItemView(String nameIn, String amountIn, String dateIn, String categoryIn) {
-    name = nameIn;
-    amount = amountIn;
-    date = dateIn;
-    category = categoryIn;
-  }
-
   public TransactionItemView(Transaction transaction){
     name = transaction.getName();
     amount = transaction.getAmountString();

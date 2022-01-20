@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 
-<?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.*?>
 <BorderPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
             stylesheets="@css/main.css">
@@ -13,7 +12,16 @@
     </top>
     <center>
         <VBox styleClass="list-view" fx:id="centerBox" alignment="BOTTOM_CENTER">
-
+            <HBox spacing="40">
+                <Label text="Date:" minWidth="80"/>
+                <Label text="Name:" minWidth="160"/>
+                <Region HBox.hgrow="ALWAYS"/>
+                <Label text="Category:" minWidth="160"/>
+                <Region HBox.hgrow="ALWAYS"/>
+                <Label text="Amount:" alignment="CENTER_RIGHT" minWidth="160"/>
+            </HBox>
+            <Label text="----------------------------------------------------------------------------------------------------------------------------------------------------------------"
+            alignment="CENTER"/>
         </VBox>
     </center>
 </BorderPane>
