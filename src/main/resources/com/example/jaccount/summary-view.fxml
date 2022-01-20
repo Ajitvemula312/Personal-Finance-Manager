@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<HBox xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml">
+    <VBox spacing="80">
+        <Region VBox.vgrow="ALWAYS"/>
+        <Label text="Total: "/>
+        <Region VBox.vgrow="ALWAYS"/>
+    </VBox>
+    <VBox spacing="80">
+        <Region VBox.vgrow="ALWAYS"/>
+        <Label fx:id="totalLabel"/>
+        <Region VBox.vgrow="ALWAYS"/>
+    </VBox>
+</HBox>

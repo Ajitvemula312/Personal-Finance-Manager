@@ -3,6 +3,7 @@ package com.example.jaccount.view;
 import com.example.jaccount.AccountingApp;
 import com.example.jaccount.Transaction;
 import com.example.jaccount.control.IController;
+import com.example.jaccount.view.viewcontrollers.SummaryViewController;
 import com.example.jaccount.view.viewcontrollers.TransactionLayoutViewController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -40,6 +41,14 @@ public class AppView implements IAppView {
     } catch (IOException e) {
       e.printStackTrace();
     }
+    setupTransactonList();
+    setupSummaryView();
+    stage.setTitle("JAccount");
+    stage.setScene(scene);
+    stage.show();
+  }
+
+  private void setupTransactonList() {
     VBox centerBox = getCenterBox();
     ListView<HBox> transactionsList = new ListView<>();
     transactionsList.setOrientation(Orientation.VERTICAL);
@@ -47,15 +56,31 @@ public class AppView implements IAppView {
     transactionsList.setItems(formatTransactions(control.getTransactions()));
     centerBox.setAlignment(Pos.BOTTOM_CENTER);
     centerBox.getChildren().add(transactionsList);
-    stage.setTitle("JAccount");
-    stage.setScene(scene);
-    stage.show();
+  }
+
+  private void setupSummaryView() {
+    HBox topbox = getTopBox();
+    FXMLLoader fxmlLoader = new FXMLLoader(AccountingApp.class.getResource("summary-view.fxml"));
+    fxmlLoader.setController(new SummaryViewController(Double.toString(control.getTotal())));
+
+    try {
+      topbox.getChildren().add(fxmlLoader.load());
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
   }
 
   private VBox getCenterBox() {
     Node element = scene.lookup("#centerBox");
     if (element instanceof VBox) {
       return ((VBox) element);
+    } else return null;
+  }
+
+  private HBox getTopBox() {
+    Node element = scene.lookup("#topBox");
+    if (element instanceof HBox) {
+      return ((HBox) element);
     } else return null;
   }
 

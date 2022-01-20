@@ -12,9 +12,6 @@ import java.util.ArrayList;
 public class AppController implements IController{
     private IModel model;
     private IAppView view;
-    public AppController(){
-
-    }
 
     @Override
     public void setModel(IModel modelIn) {
@@ -37,6 +34,11 @@ public class AppController implements IController{
 
     public ArrayList<Transaction> getTransactions(){
         return (ArrayList<Transaction>) model.getTransactions();
+    }
+
+    @Override
+    public double getTotal() {
+        return model.sumAllTransactions();
     }
 
     @Override

@@ -1,16 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 
-<?import javafx.scene.control.Button?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
-<?import java.net.URL?>
 <BorderPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
             stylesheets="@css/main.css">
     <top>
-        <HBox styleClass="top-box">
+        <HBox styleClass="top-box" fx:id="topBox">
         </HBox>
     </top>
     <center>

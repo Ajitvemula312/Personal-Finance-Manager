@@ -13,4 +13,5 @@ public interface IController {
     void addTransaction(ActionEvent actionEvent);
     void printTransactions(ActionEvent actionEvent);
     ArrayList<Transaction> getTransactions();
+    double getTotal();
 }

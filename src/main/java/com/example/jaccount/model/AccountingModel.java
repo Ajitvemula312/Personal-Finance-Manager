@@ -44,7 +44,7 @@ public class AccountingModel implements IModel {
       resultSet = preparedStatement.executeQuery();
       while (resultSet.next()) {
         String name = resultSet.getString("name");
-        int amount = resultSet.getInt("amount");
+        double amount = resultSet.getInt("amount");
         Date date = resultSet.getDate("date");
         transactions.add(new Transaction(name, amount, date));
       }
@@ -56,6 +56,24 @@ public class AccountingModel implements IModel {
     return transactions;
   }
 
+  public double sumAllTransactions(){
+    double sum = 0;
+    createConnection(database, System.getenv("SQL_USER"), System.getenv("SQL_PASSWORD"));
+    try {
+      preparedStatement = connection
+          .prepareStatement("SELECT amount from " + database + "." + table);
+      resultSet = preparedStatement.executeQuery();
+      while (resultSet.next()) {
+        double amount = resultSet.getBigDecimal("amount").doubleValue();
+        sum += amount;
+      }
+    } catch (SQLException e) {
+      System.out.println(e);
+    } finally {
+      close();
+    }
+    return Math.round(sum);
+  }
 
   private void createConnection(String databaseIn, String userIn, String passwordIn) {
     try {
