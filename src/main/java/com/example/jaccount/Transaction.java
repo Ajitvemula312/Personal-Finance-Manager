@@ -1,5 +1,7 @@
 package com.example.jaccount;
 
+import com.example.jaccount.view.viewcontrollers.TransactionItemView;
+
 import java.sql.Date;
 
 public class Transaction {
@@ -12,6 +14,13 @@ public class Transaction {
     name = nameIn;
     amount = amountIn;
     date = dateIn;
+  }
+
+  public Transaction(String nameIn, double amountIn, Date dateIn, String categoryIn) {
+    name = nameIn;
+    amount = amountIn;
+    date = dateIn;
+    category = categoryIn;
   }
 
   public String getName() {
@@ -31,5 +40,19 @@ public class Transaction {
 
   public Date getDate() {
     return date;
+  }
+
+  public TransactionItemView getItemViewController(){
+    TransactionItemView transactionView = new TransactionItemView(
+        name,
+        getAmountString(),
+        date.toString(),
+        category
+    );
+    return transactionView;
+  }
+
+  public String getCategory() {
+    return category;
   }
 }

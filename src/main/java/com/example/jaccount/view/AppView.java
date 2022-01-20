@@ -4,7 +4,6 @@ import com.example.jaccount.AccountingApp;
 import com.example.jaccount.Transaction;
 import com.example.jaccount.control.IController;
 import com.example.jaccount.view.viewcontrollers.MainTransactionsView;
-import com.example.jaccount.view.viewcontrollers.TransactionItemView;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
@@ -18,7 +17,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 public class AppView implements IAppView {
-  private Stage stage = null;
+  private final Stage stage;
   Scene scene = null;
 
   public AppView(Stage stageIn) {
@@ -49,31 +48,23 @@ public class AppView implements IAppView {
     ListView<HBox> transactionsList = new ListView<>();
     transactionsList.setOrientation(Orientation.VERTICAL);
     transactionsList.getStyleClass().add("test");
-    transactionsList.setItems(formatTransactions(transactions));
+    transactionsList.setItems(getTransactionItemViews(transactions));
     return transactionsList;
   }
 
 
-  private ObservableList<HBox> formatTransactions(ArrayList<Transaction> transactions) {
+  private ObservableList<HBox> getTransactionItemViews(ArrayList<Transaction> transactions) {
     ArrayList<HBox> boxArray = new ArrayList<>();
 
     for (Transaction trans : transactions) {
-      FXMLLoader loader = new FXMLLoader(AccountingApp.class.getResource("transaction-layout.fxml"));
-      HBox box = new HBox(20);
-      TransactionItemView control = new TransactionItemView(
-          trans.getName(),
-          trans.getAmountString(),
-          trans.getDate().toString()
-      );
-
-      loader.setController(control);
-
+      FXMLLoader loader = new FXMLLoader(AccountingApp.class.getResource("transaction-item.fxml"));
+      HBox box = new HBox();
+      loader.setController(trans.getItemViewController());
       try {
         box = loader.load();
       } catch (IOException e) {
         e.printStackTrace();
       }
-
       boxArray.add(box);
     }
     return FXCollections.observableList(boxArray);

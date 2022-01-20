@@ -5,11 +5,12 @@
 
 <HBox xmlns="http://javafx.com/javafx"
       xmlns:fx="http://javafx.com/fxml"
-      spacing="80"
+      spacing="40"
       stylesheets="@css/main.css">
-    <Label fx:id="nameLabel" minWidth="200"/>
+    <Label fx:id="dateLabel" />
+    <Label fx:id="nameLabel" minWidth="160"/>
     <Region HBox.hgrow="ALWAYS"/>
-    <Label fx:id="amountLabel" alignment="CENTER_RIGHT" minWidth="200"/>
+    <Label fx:id="categoryLabel" minWidth="160"/>
     <Region HBox.hgrow="ALWAYS"/>
-    <Label fx:id="dateLabel" alignment="CENTER_RIGHT" minWidth="200"/>
+    <Label fx:id="amountLabel" alignment="CENTER_RIGHT" minWidth="160"/>
 </HBox>

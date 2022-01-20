@@ -40,13 +40,14 @@ public class AccountingModel implements IModel {
     createConnection(database, System.getenv("SQL_USER"), System.getenv("SQL_PASSWORD"));
     try {
       preparedStatement = connection
-          .prepareStatement("SELECT name, amount, date from " + database + "." + table);
+          .prepareStatement("SELECT name, amount, date, category from " + database + "." + table);
       resultSet = preparedStatement.executeQuery();
       while (resultSet.next()) {
         String name = resultSet.getString("name");
         double amount = resultSet.getInt("amount");
         Date date = resultSet.getDate("date");
-        transactions.add(new Transaction(name, amount, date));
+        String category = resultSet.getString("category");
+        transactions.add(new Transaction(name, amount, date, category));
       }
     } catch (SQLException e) {
       System.out.println(e);

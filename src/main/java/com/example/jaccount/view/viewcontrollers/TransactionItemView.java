@@ -11,13 +11,16 @@ import java.util.ResourceBundle;
 public class TransactionItemView extends HBox implements Initializable {
   private final String name;
   private final String amount;
-  private String date;
+  private final String date;
+  private String category = "";
   @FXML
   private Label nameLabel;
   @FXML
   private Label amountLabel;
   @FXML
   private Label dateLabel;
+  @FXML
+  private Label categoryLabel;
 
   public TransactionItemView(String nameIn, String amountIn, String dateIn) {
     name = nameIn;
@@ -25,12 +28,19 @@ public class TransactionItemView extends HBox implements Initializable {
     date = dateIn;
   }
 
+  public TransactionItemView(String nameIn, String amountIn, String dateIn, String categoryIn) {
+    name = nameIn;
+    amount = amountIn;
+    date = dateIn;
+    category = categoryIn;
+  }
+
   @Override
   public void initialize(URL location, ResourceBundle resources) {
     nameLabel.setText(name);
     amountLabel.setText(amount);
     dateLabel.setText(date);
-
+    categoryLabel.setText(category);
   }
 
 }

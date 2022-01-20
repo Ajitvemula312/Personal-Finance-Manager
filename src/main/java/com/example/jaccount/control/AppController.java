@@ -5,8 +5,6 @@ import com.example.jaccount.model.IModel;
 import com.example.jaccount.view.IAppView;
 import javafx.event.ActionEvent;
 
-import java.sql.Date;
-import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class AppController implements IController{
@@ -25,11 +23,11 @@ public class AppController implements IController{
     }
 
     public void addTransaction(ActionEvent actionEvent) {
-        double amount = Double.parseDouble(view.getAmount());
-        String name = view.getName();
-        Date date = Date.valueOf(LocalDate.now());
-        Transaction transaction = new Transaction(name, amount, date);
-        model.addTransaction(transaction);
+       // double amount = Double.parseDouble(view.getAmount());
+       // String name = view.getName();
+       // Date date = Date.valueOf(LocalDate.now());
+       // Transaction transaction = new Transaction(name, amount, date);
+       // model.addTransaction(transaction);
     }
 
     public ArrayList<Transaction> getTransactions(){
