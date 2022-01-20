@@ -8,12 +8,12 @@ import javafx.scene.layout.HBox;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class SummaryViewController extends HBox implements Initializable {
+public class SummaryView extends HBox implements Initializable {
   @FXML
   private Label totalLabel;
   private String total;
 
-  public SummaryViewController(String totalIn){
+  public SummaryView(String totalIn){
     total = totalIn;
   }
 

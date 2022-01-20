@@ -8,7 +8,7 @@ import javafx.scene.layout.HBox;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class TransactionLayoutViewController extends HBox implements Initializable {
+public class TransactionItemView extends HBox implements Initializable {
   private final String name;
   private final String amount;
   private String date;
@@ -19,7 +19,7 @@ public class TransactionLayoutViewController extends HBox implements Initializab
   @FXML
   private Label dateLabel;
 
-  public TransactionLayoutViewController(String nameIn, String amountIn, String dateIn) {
+  public TransactionItemView(String nameIn, String amountIn, String dateIn) {
     name = nameIn;
     amount = amountIn;
     date = dateIn;
