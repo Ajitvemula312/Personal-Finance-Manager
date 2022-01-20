@@ -4,6 +4,7 @@ import com.example.jaccount.AccountingApp;
 import com.example.jaccount.Transaction;
 import com.example.jaccount.control.IController;
 import com.example.jaccount.view.viewcontrollers.MainTransactionsView;
+import com.example.jaccount.view.viewcontrollers.TransactionItemView;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
@@ -59,7 +60,7 @@ public class AppView implements IAppView {
     for (Transaction trans : transactions) {
       FXMLLoader loader = new FXMLLoader(AccountingApp.class.getResource("transaction-item.fxml"));
       HBox box = new HBox();
-      loader.setController(trans.getItemViewController());
+      loader.setController(new TransactionItemView(trans));
       try {
         box = loader.load();
       } catch (IOException e) {

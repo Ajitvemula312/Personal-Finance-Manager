@@ -1,5 +1,6 @@
 package com.example.jaccount.view.viewcontrollers;
 
+import com.example.jaccount.Transaction;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
@@ -33,6 +34,13 @@ public class TransactionItemView extends HBox implements Initializable {
     amount = amountIn;
     date = dateIn;
     category = categoryIn;
+  }
+
+  public TransactionItemView(Transaction transaction){
+    name = transaction.getName();
+    amount = transaction.getAmountString();
+    date = transaction.getDate().toString();
+    category = transaction.getCategory();
   }
 
   @Override

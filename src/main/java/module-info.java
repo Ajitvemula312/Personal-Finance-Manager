@@ -1,4 +1,4 @@
-module com.example.accountingprogram {
+module com.example.jaccount {
     requires javafx.controls;
     requires javafx.fxml;
     requires java.sql;
